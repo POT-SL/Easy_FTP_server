@@ -1,0 +1,28 @@
+.box {
+
+    width: 70vw;
+    height: 10vh;
+    background-color: rgb(246, 246, 246);
+    border-radius: 20px;
+    margin-left: 3%;
+    padding: 0 5vw;
+
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    transition: transform 0.2s ease;
+
+}
+.box:hover {
+    transform: scale(1.05);
+}
+
+.box img {
+    width: 100px;
+    height: 100px;
+
+    background-size: cover;
+    background-position: center;
+}
