@@ -1,0 +1,116 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTP服务器（简易版）</title>
+    <!--css-->
+    <style>body {background-color: rgb(229, 229, 229);}</style>
+    <link rel="stylesheet" href="./css/box.css">
+    <link rel="stylesheet" href="./css/switch_button.css">
+    <link rel="stylesheet" href="./css/taskbar.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/status.css">
+    <link rel="stylesheet" href="./css/ftp_set.css">
+    <link rel="stylesheet" href="./css/sys_set.css">
+    <link rel="stylesheet" href="./css/about.css">
+
+</head>
+<body>
+
+    <!--taskbar-->
+    <div class="taskbar">
+        <button id="taskbar_status"></button>
+        <button id="taskbar_ftpset"></button>
+        <button id="taskbar_system"></button>
+        <button id="taskbar_about"></button>
+    </div>
+
+    <!--(主)界面-->
+    <div class="main">
+        <!--滑动块-->
+        <div id="gui_main">
+
+            <!--状态界面-->
+            <div id="gui_status">
+
+                <div class="ftpset_title"><p>--主页--</p></div>
+                <!--同步状态-->
+                <div class="box", style="height: 150px; width: 200px; border-radius: 15px;">
+                    <img src="./img/explorer.png" alt="">
+                    <div>
+                        <p></p>
+                        <p>上次FTP启用时间：</p>
+                        <p id="last_sync_time">1970-01-01 08:00</p>
+                        <p></p>
+                    </div>
+                </div>
+
+                <!--ftp开启状态-->
+                <div class="ftp_status">
+                    <p>ftp服务：</p>
+                    <p id="ftp_status">开启</p>
+                </div>
+
+                <!--文件夹路径-->
+                <div class="status_display" style="width: fit-content; justify-content: center; margin-top: 3%; border-radius: 150px;">
+                    <p>文件夹路径：</p>
+                    <p id="file_location">C:\Users\POT\Appdata\Local\Backup\</p>
+                </div>
+
+            </div>
+
+            <!--ftp设置界面-->
+            <div id="gui_ftpset">
+
+                <!--文件夹设置-->
+                <div class="ftpset_title"><p>--同步文件夹--</p></div>
+                <div class="status_display", style="margin-top: 2%;">
+                    <p>文件夹路径：</p>
+                    <p id="file_location">C:\Users\POT\Appdata\Local\Backup\</p>
+                </div>
+                <div class="ftpset_locaion">
+                    <button id="choice_locaion"><p>更改路径</p></button>
+                    <button id="open_locaion"><p>打开文件夹</p></button>
+                </div>
+
+                <!--定时开启设置-->
+                <div class="ftpset_title"><p>--定时开启--</p></div>
+                <div class="status_display", style="margin-top: 2%;">
+                    <div>
+                        <p>定时开启开关</p>
+                        <p style="font-size: 0.8rem; color: rgb(142, 142, 142);">出于安全性考虑，防止24h暴露端口</p>
+                    </div>
+                    <label class="toggle-switch"><input type="checkbox", id="auto_start"><span class="slider round"></span></label>
+                </div>
+                <div class="status_display", style="margin-top: 2%;">
+                    <p>定时开启</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 300px;">
+                        <p>开启时间：</p>
+                        <input type="number" id="start_hour" value="08" min="0" max="23">
+                        <p>:</p>
+                        <input type="number" id="start_minute" value="00" min="0" max="59">
+                        <p>关闭时间：</p>
+                        <input type="number" id="end_hour" value="20" min="0" max="23">
+                        <p>:</p>
+                        <input type="number" id="end_minute" value="00" min="0" max="59">
+                    </div>
+                </div>
+
+            </div>
+
+            <!--GUI设置界面-->
+            <div id="gui_system"><p>界面3</p></div>
+
+            <!--关于界面-->
+            <div id="gui_about"><p>界面4</p></div>
+            
+        </div>
+
+    </div>
+
+    <script src="./jts/taskbar.js"></script>
+    <script src="./jts/file_location_button_event.js"></script>
+    <script src="./jts/auto_start_button_event.js"></script>
+
+</body>
+</html>

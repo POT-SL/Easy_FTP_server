@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="Black">
-    <option name="sdkName" value="Python 3.14 (Easy_FTP_server)" />
-  </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.14 (ftp服务器)" project-jdk-type="Python SDK" />
-</project>

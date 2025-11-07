@@ -1,0 +1,7 @@
+.gui_status > *{
+    border: 5px solid green;
+    transition: transform 0.2s ease;
+}
+.gui_status > *:hover {
+    transform: scale(1.05);
+}

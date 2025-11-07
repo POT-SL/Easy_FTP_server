@@ -1,0 +1,105 @@
+.sync_status {
+    width: 35vw;
+    height: 15vw;
+    background-color: rgb(246, 246, 246);
+    border-radius: 20px;
+    margin-top: 3%;
+    margin-left: 3%;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    text-align: center;
+
+    transition: transform 0.2s ease;
+}
+.sync_status:hover {
+    transform: scale(1.05);
+}
+
+.sync_status img {
+    width: 10vw;
+    height: 10vw;
+    margin-left: 2vw;
+    margin-top: 2.5vw;
+    background-size: cover;
+    background-position: center;
+}
+.sync_status div {
+    width: 20vw;
+    height: 10vw;
+    margin-top: 2.5vw;
+    font-weight: 450;
+    font-size: 0.9rem;
+    color: rgb(100, 100, 100);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.sync_status div p {
+    margin: 4%;
+}
+
+.ftp_status {
+
+    width: 18vw;
+    height: 10vh;
+    background-color: rgb(246, 246, 246);
+    border-radius: 150px;
+    margin-top: 3%;
+    margin-left: 3%;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 0.2s ease;
+
+}
+.ftp_status:hover {
+    transform: scale(1.05);
+}
+.ftp_status p {
+    font-weight: 450;
+    font-size: 1rem;
+    color: rgb(100, 100, 100);
+    white-space: nowrap;
+}
+#ftp_status {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color:rgb(148, 243, 179);
+}
+
+.status_display {
+
+    width: 70vw;
+    height: 10vh;
+    background-color: rgb(246, 246, 246);
+    border-radius: 20px;
+    margin-left: 3%;
+    padding: 0 5vw;
+
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    transition: transform 0.2s ease;
+
+}
+.status_display:hover {
+    transform: scale(1.05);
+}
+.status_display p {
+    font-weight: 450;
+    font-size: 1rem;
+    color: rgb(100, 100, 100);
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+}
+.status_display div {
+    width: 5vw;
+}

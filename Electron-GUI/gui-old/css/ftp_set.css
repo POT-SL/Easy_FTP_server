@@ -1,0 +1,63 @@
+.ftpset_title {
+    margin-top: 5%;
+    margin-left: 4%;
+}
+
+.ftpset_title p {
+
+    font-weight: 450;
+    font-size: 1rem;
+    color: rgb(100, 100, 100);
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    transition: transform 0.2s ease;
+}
+.ftpset_title p:hover {
+    transform: scale(1.05);
+}
+
+.ftpset_locaion {
+    width: 80vw;
+    height: 5vh;
+    margin-top: 15px;
+    margin-left: 2.5%;
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+}
+.ftpset_locaion button {
+
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    width: 15vw;
+    height: 5vw;
+    margin: 5px;
+    border-radius: 150px;
+    background-color: rgb(246, 246, 246);
+
+    transition: transform 0.2s ease;
+
+}
+.ftpset_locaion button:hover {
+    transform: scale(1.05);
+}
+.ftpset_locaion button:active {
+    transform: scale(0.9);
+    opacity: 0.8;  /* 可选：点击时稍微透明 */
+}
+.ftpset_locaion p {
+    font-weight: 450;
+    font-size: 0.8rem;
+    color: rgb(100, 100, 100);
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+}
+
+.status_display > div > input {
+    width: 10vw;
+    height: 7vw;
+}
