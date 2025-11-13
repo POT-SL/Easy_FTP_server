@@ -4,10 +4,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FTP服务器（简易版）</title>
     <style>body {background-color: rgb(229, 229, 229);}</style>
+    <link rel="stylesheet" href="./css/test.css">
     <link rel="stylesheet" href="./css/taskbar.css">
     <link rel="stylesheet" href="./css/main_frame.css">
     <link rel="stylesheet" href="./css/font_frane.css">
     <link rel="stylesheet" href="./css/box_frame.css">
+    <link rel="stylesheet" href="./css/switch_button.css">
 </head>
 <body>
     
@@ -31,11 +33,9 @@
                 <!--同步状态-->
                 <div class="box", style="height: 150px; width: 250px; border-radius: 15px;">
                     <img src="./img/explorer.png" alt="">
-                    <div>
-                        <p></p>
-                        <p>上次FTP启用时间：</p>
-                        <p id="last_sync_time">1970-01-01 08:00</p>
-                        <p></p>
+                    <div style="height: 100px;">
+                        <p style="margin: 15px;">上次FTP启用时间：</p>
+                        <p style="margin: 15px;" id="last_sync_time">1970-01-01 08:00</p>
                     </div>
                     </div>
 
@@ -71,21 +71,21 @@
                 <div class="text"><p>--定时开启--</p></div>
                 <div class="box">
                     <div style="height: 50px;">
-                        <p>定时开启开关</p>
+                        <p style="margin-top: 5px;">定时开启开关</p，>
                         <p style="font-size: 0.8rem; color: rgb(142, 142, 142);">出于安全性考虑，防止24h暴露端口</p>
                     </div>
                     <label class="toggle-switch"><input type="checkbox", id="auto_start"><span class="slider round"></span></label>
                 </div>
-                <div class="status_display", style="margin-top: 2%;">
+                <div class="box">
                     <p>定时开启</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center; width: 300px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-direction: row;">
                         <p>开启时间：</p>
                         <input type="number" id="start_hour" value="08" min="0" max="23">
-                        <p>:</p>
+                        <p style="margin: 5px;">:</p>
                         <input type="number" id="start_minute" value="00" min="0" max="59">
-                        <p>关闭时间：</p>
+                        <p style="margin-left: 5px;">关闭时间：</p>
                         <input type="number" id="end_hour" value="20" min="0" max="23">
-                        <p>:</p>
+                        <p style="margin: 5px;">:</p>
                         <input type="number" id="end_minute" value="00" min="0" max="59">
                     </div>
                 </div>
@@ -102,9 +102,14 @@
 
     </div>
 
+    <!---->
     <script src="./jts/taskbar.js"></script>
+    <!---->
     <script src="./jts/file_location_button_event.js"></script>
+    <!---->
     <script src="./jts/auto_start_button_event.js"></script>
+    <!--时间输入自动纠正-->
+    <script src="./jts/input_catch.js"></script>
 
 </body>
 </html>

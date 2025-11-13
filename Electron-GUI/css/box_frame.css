@@ -79,3 +79,36 @@
     justify-content: flex-start;
     flex-direction: column;
 }
+
+/* div_label */
+.box div input {
+    
+    width: 45px;
+    height: 30px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    color: rgb(100, 100, 100);
+    text-align: center;
+    -moz-appearance: textfield;
+    appearance: none;
+    transition: all 0.3s ease;
+  
+    /* --- 扁平化风格的修改 --- */
+    border: none;              /* 完全去掉边框 */
+    border-bottom: 1px solid #ddd; /* 只保留底部线条 */
+    border-right: 1px solid #ddd;
+    background-color: #fafafa;   /* 添加一个浅灰背景 */
+    font-variant-numeric: tabular-nums; /* 让所有数字等宽，对齐更美观 */
+}
+.box div input::-webkit-outer-spin-button,
+.box div input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.box div input:focus {
+    outline: none;
+    background-color: #ffffff; /* 焦点时背景变白 */
+    border-bottom: 2px solid #66ccff; /* 底部线条变蓝 */
+}
