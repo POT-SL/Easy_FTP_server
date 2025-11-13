@@ -1,0 +1,81 @@
+/* box */
+.box {
+
+    width: 580px;
+    height: 50px;
+    background-color: rgb(246, 246, 246);
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-left: 30px;
+    padding: 0 20px;
+
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    transition: transform 0.2s ease;
+
+}
+.box:hover {
+    transform: scale(1.05);
+}
+/* 无动画的盒子 */
+.box.button {
+    width: 620px;
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0;
+    justify-content: flex-end;
+    overflow: visible;
+    transition: none !important;
+}
+.box.button:hover {
+    transform: none !important;
+}
+
+.box img {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+}
+.box p {
+    margin: 0;
+    font-weight: 450;
+    font-size: 15px;
+    color: rgb(100, 100, 100);
+    white-space: nowrap;
+}
+
+/* button */
+.box button {
+
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    margin-left: 15px;
+    border-radius: 75px;
+    background-color: rgb(246, 246, 246);
+
+    transition: transform 0.2s ease;
+
+}
+.box button:hover {
+    transform: scale(1.05);
+}
+.box button:active {
+    transform: scale(0.9);
+    opacity: 0.8;  /* 可选：点击时稍微透明 */
+}
+
+/* div_text */
+.box div {
+    height: 50px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
