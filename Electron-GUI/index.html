@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/font_frane.css">
     <link rel="stylesheet" href="./css/box_frame.css">
     <link rel="stylesheet" href="./css/switch_button.css">
+    <link rel="stylesheet" href="./css/psw_show.css">
 </head>
 <body>
     
@@ -19,6 +20,11 @@
         <button id="taskbar_ftpset"></button>
         <button id="taskbar_system"></button>
         <button id="taskbar_about"></button>
+    </div>
+
+    <!--账密设置界面(堆在最前面)-->
+    <div id="psw_change">
+        <div></div>
     </div>
 
     <!--(主)界面-->
@@ -31,18 +37,18 @@
 
                 <div class="text"><p>--主页--</p></div>
                 <!--同步状态-->
-                <div class="box", style="height: 150px; width: 250px; border-radius: 15px;">
+                <div class="box" style="height: 150px; width: 250px; border-radius: 15px;">
                     <img src="./img/explorer.png" alt="">
                     <div style="height: 100px;">
                         <p style="margin: 15px;">上次FTP启用时间：</p>
                         <p style="margin: 15px;" id="last_sync_time">1970-01-01 08:00</p>
                     </div>
-                    </div>
+                </div>
 
                 <!--ftp开启状态-->
-                <div class="box", style="width: 100px;">
+                <div class="box" style="width: 100px;">
                     <p>ftp服务：</p>
-                    <p id="ftp_status", style="font-weight: 700; color:rgb(148, 243, 179);">开启</p>
+                    <p id="ftp_status" style="font-weight: 700; color:rgb(148, 243, 179);">开启</p>
                 </div>
 
                 <!--文件夹路径-->
@@ -74,7 +80,7 @@
                         <p style="margin-top: 5px;">定时开启开关</p，>
                         <p style="font-size: 0.8rem; color: rgb(142, 142, 142);">出于安全性考虑，防止24h暴露端口</p>
                     </div>
-                    <label class="toggle-switch"><input type="checkbox", id="auto_start"><span class="slider round"></span></label>
+                    <label class="toggle-switch"><input type="checkbox" id="auto_start"><span class="slider round"></span></label>
                 </div>
                 <div class="box">
                     <p>定时开启</p>
@@ -92,11 +98,48 @@
 
             </div>
 
-            <!--GUI设置界面-->
-            <div id="gui_system"><p>界面3</p></div>
+            <!--用户账户设置界面-->
+            <div id="gui_system">
+
+                <!--端口设置-->
+                <div class="text"><p>--自定义端口--</p></div>
+                <div class="box" style="width: 150px;">
+                    <p>端口号：</p>
+                    <input type="number" id="port" value="21" min="1" max="65535">
+                </div>
+                <div class="text" style="margin-top: 5px; margin-left: 135px;"><p id="port_show" style="font-size: 12px;">当前端口：21</p></div>
+                
+                <!--用户账户设置-->
+                <div class="text"><p>--自定义账户--</p></div>
+                <div class="box">
+                    <div style="width: 290; display: flex; flex-direction: row;">
+                        <p>用户：</p>
+                        <p id="user_show">User</p>
+                    </div>
+                    <div style="width: 290; display: flex; flex-direction: row;">
+                        <p>密码：</p>
+                    <p id="psw_show">123456</p>
+                    </div>
+                </div>
+                <div class="box button">
+                    <button id="edit_user" style="width: 150px;"><p>更改账户密码</p></button>
+                </div>
+
+            </div>
 
             <!--关于界面-->
-            <div id="gui_about"><p>界面4</p></div>
+            <div id="gui_about">
+                
+                <div class="text"><p>--关于--</p></div>
+                <div class="box" style="height: 150px; width: 300px; border-radius: 15px;">
+                    <img src="./img/explorer.png" alt="">
+                    <div style="height: 100px;">
+                        <p style="margin: 15px;">作者：笙铃/Nekofox POT</p>
+                        <p style="margin: 15px; font-size: 13px;">如有bug可以去issue反馈.</p>
+                    </div>
+                </div>
+
+            </div>
             
         </div>
 
@@ -110,6 +153,8 @@
     <script src="./jts/auto_start_button_event.js"></script>
     <!--时间输入自动纠正-->
     <script src="./jts/input_catch.js"></script>
+    <!--用户账户修改弹出-->
+    <script src="./jts/user_change_display.js"></script>
 
 </body>
 </html>

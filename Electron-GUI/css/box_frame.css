@@ -81,7 +81,7 @@
 }
 
 /* div_label */
-.box div input {
+.box input {
     
     width: 45px;
     height: 30px;
@@ -102,12 +102,12 @@
     background-color: #fafafa;   /* 添加一个浅灰背景 */
     font-variant-numeric: tabular-nums; /* 让所有数字等宽，对齐更美观 */
 }
-.box div input::-webkit-outer-spin-button,
-.box div input::-webkit-inner-spin-button {
+.box input::-webkit-outer-spin-button,
+.box input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.box div input:focus {
+.box input:focus {
     outline: none;
     background-color: #ffffff; /* 焦点时背景变白 */
     border-bottom: 2px solid #66ccff; /* 底部线条变蓝 */

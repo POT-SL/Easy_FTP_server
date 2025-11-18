@@ -1,0 +1,26 @@
+#psw_change {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 800px;
+    height: 600px;
+    background-color: rgba(168, 168, 168, 0.2);
+    backdrop-filter: blur(5px);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+}
+#psw_change div {
+
+    width: 250px;
+    height: 250px;
+    background-color: rgb(246, 246, 246);
+    border-radius: 20px;
+
+    overflow: hidden;
+    display: flex;
+
+}
