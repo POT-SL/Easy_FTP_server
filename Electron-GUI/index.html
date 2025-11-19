@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/box_frame.css">
     <link rel="stylesheet" href="./css/switch_button.css">
     <link rel="stylesheet" href="./css/psw_show.css">
+    <link rel="stylesheet" href="./css/pop_up_notice.css">
 </head>
 <body>
     
@@ -24,8 +25,26 @@
 
     <!--账密设置界面(堆在最前面)-->
     <div id="psw_change">
-        <div></div>
+        <div style="background-color: rgba(246, 246, 246, 0.5); backdrop-filter: blur(5px);">
+            <div style="width: 250px; height: 175px; justify-content: space-evenly;">
+                <div style="width: 250px; height: 65px; background-color: rgba(253, 253, 253, 0.5); flex-direction: row;">
+                    <p class="text">账户：</p>
+                    <input type="text" name="账户" id="edit_user">
+                </div>
+                <div style="width: 250px; height: 65px; background-color: rgba(253, 253, 253, 0.5); flex-direction: row;">
+                    <p class="text">密码：</p>
+                    <input type="text" name="密码" id="edit_psw">
+                </div>
+            </div>
+            <div style="width: 300px; height: 75px; flex-direction: row; justify-content: space-evenly;">
+                <button id="psw_confirm"><p class="text">确认</p></button>
+                <button id="psw_cancel"><p class="text">取消</p></button>
+            </div>
+        </div>
     </div>
+
+    <!--通知界面(默认隐藏)-->
+    <div id="pop_up"></div>
 
     <!--(主)界面-->
     <div class="main">
@@ -122,7 +141,7 @@
                     </div>
                 </div>
                 <div class="box button">
-                    <button id="edit_user" style="width: 150px;"><p>更改账户密码</p></button>
+                    <button id="edit_user_display" style="width: 150px;"><p>更改账户密码</p></button>
                 </div>
 
             </div>
@@ -155,6 +174,8 @@
     <script src="./jts/input_catch.js"></script>
     <!--用户账户修改弹出-->
     <script src="./jts/user_change_display.js"></script>
+    <!--弹窗-->
+    <script src="./jts/pop_up_notice.js"></script>
 
 </body>
 </html>

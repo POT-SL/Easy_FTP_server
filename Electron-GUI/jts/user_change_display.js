@@ -1,12 +1,20 @@
 "use strict";
-// 获取按钮和div元素
-const editUserButton = document.getElementById('edit_user');
-const pswChangeDiv = document.getElementById('psw_change');
-// 检查元素是否存在
-if (editUserButton && pswChangeDiv) {
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('用户更改显示脚本已加载');
+    // 获取按钮和div元素
+    const editUserButton = document.getElementById('edit_user_display');
+    const pswChangeDiv = document.getElementById('psw_change');
+    const pswCanelButton = document.getElementById('psw_cancel');
     // 为按钮添加点击事件监听器
     editUserButton.addEventListener('click', () => {
         // 显示div元素
-        pswChangeDiv.style.display = 'flex'; // 或者使用 'flex', 'inline-block' 等，根据你的布局需要
+        console.log('编辑用户按钮被点击');
+        pswChangeDiv.style.display = 'flex';
     });
-}
+    // 为取消按钮添加点击事件监听器
+    pswCanelButton.addEventListener('click', () => {
+        // 隐藏div元素
+        console.log('取消按钮被点击');
+        pswChangeDiv.style.display = 'none';
+    });
+});
