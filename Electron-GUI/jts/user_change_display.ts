@@ -5,17 +5,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const pswChangeDiv = document.getElementById('psw_change') as HTMLDivElement;
   const pswCanelButton = document.getElementById('psw_cancel') as HTMLButtonElement;
 
+  // 绑定通知
+  const popup = document.getElementById('pop_up') as HTMLDivElement;
+
   // 为按钮添加点击事件监听器
   editUserButton.addEventListener('click', () => {
     // 显示div元素
-    console.log('编辑用户按钮被点击');
+    console.log('编辑界面');
     pswChangeDiv.style.display = 'flex';
   });
 
   // 为取消按钮添加点击事件监听器
     pswCanelButton.addEventListener('click', () => {
-      // 隐藏div元素
-      console.log('取消按钮被点击');
+      console.log('取消');
+      // 隐藏界面
       pswChangeDiv.style.display = 'none';
+      //通知
+      popup.style.backgroundColor = 'rgb(238, 0, 0)';
+      popup.innerHTML = '<p>更改已取消</p>'
+      popup.classList.remove('hide');
+      popup.classList.add('show');
+      setTimeout(() => {
+        popup.classList.remove('show');
+        popup.classList.add('hide');
+        }, 1500);
+
     });
 });

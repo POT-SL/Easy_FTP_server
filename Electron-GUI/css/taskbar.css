@@ -47,3 +47,7 @@
     transform: scale(0.9);
     opacity: 0.8;  /* 可选：点击时稍微透明 */
 }
+.taskbar > button > img {
+    width: 45px;
+    height: 45px;
+}

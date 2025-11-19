@@ -7,11 +7,18 @@ const createWindow = () => {
     resizable: false,
   })
 
-  win.loadFile('index.html')
+  win.loadURL('http://127.0.0.1:541/')
 
   win.setMenu(null);
 }
 
 app.whenReady().then(() => {
-  createWindow()
+  // 检查是否传入了 "--flask-start" 参数
+  if (process.argv.includes('--flask-start')) {
+    createWindow();
+  } else {
+    console.log('No have "--flask-start.');
+    // 如果不需要做其他事情，可以简单地返回或让应用退出
+    app.quit(); // 如果希望应用在没有参数时不显示窗口就退出，可以取消注释这行
+  }
 })

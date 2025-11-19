@@ -93,7 +93,7 @@
     text-align: center;
     -moz-appearance: textfield;
     appearance: none;
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
   
     /* --- 扁平化风格的修改 --- */
     border: none;              /* 完全去掉边框 */

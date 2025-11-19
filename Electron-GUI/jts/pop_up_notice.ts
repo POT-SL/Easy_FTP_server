@@ -13,6 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
         popup.classList.remove('show');
         popup.classList.add('hide');
-        }, 3000);
+        }, 1500);
     });
 });

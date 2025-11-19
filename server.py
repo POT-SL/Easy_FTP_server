@@ -3,7 +3,7 @@ from json import loads
 from threading import Thread
 from multiprocessing import Process
 
-app = Flask(__name__, static_url_path='', static_folder='./gui')
+app = Flask(__name__, static_url_path='', static_folder='./Electron-GUI')
 ########################################################################################################################
 #
 # 事件处理
@@ -29,7 +29,7 @@ def gui_flask():
 
     @app.route('/')
     def index():
-        return send_from_directory('./gui', 'index.html')
+        return send_from_directory('./Electron-GUI', 'index.html')
     app.run(host='0.0.0.0', port=541)
 
 ########################################################################################################################
