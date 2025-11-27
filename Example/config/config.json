@@ -1,0 +1,16 @@
+{
+    "port": 1314,
+    "user": "ua",
+    "password": "123456",
+    "path": "C:/Users/13522/Pictures",
+    "run_on_time": 1,
+    "auto_start": 0,
+    "start_time": [
+        13,
+        28
+    ],
+    "end_time": [
+        13,
+        35
+    ]
+}
