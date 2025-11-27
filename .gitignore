@@ -162,9 +162,12 @@ cython_debug/
 .idea/
 
 # Electron
-Electron-GUI/package.json
-Electron-GUI/node_modules/
-Electron-GUI/package-lock.json
-Electron-GUI/.npmrc
-Electron-GUI/forge.config.js
-Electron-GUI/out
+Electron-GUI_source/package.json
+Electron-GUI_source/node_modules/
+Electron-GUI_source/package-lock.json
+Electron-GUI_source/.npmrc
+Electron-GUI_source/forge.config.js
+Electron-GUI_source/out
+Electron-GUI_source/A64
+
+Electron-GUI/
