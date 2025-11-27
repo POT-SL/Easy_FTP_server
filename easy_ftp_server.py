@@ -5,6 +5,12 @@
 ######
 from json import loads, dumps
 from shutil import move
+from multiprocessing import Process
+from os import system, kill
+from signal import SIGTERM
+from flask import Flask, send_from_directory, request
+from requests import get
+
 
 from ftp_core import ftp_core
 
@@ -20,7 +26,6 @@ account = {'user': 'user', 'psw': '123123'}
 ###########
 # 全局变量 #
 ##########
-ftp_core = ftp_core(account['user'], account['psw'], ftp_path, port)
 
 ########################################################################################################################
 # log记录 #
@@ -31,8 +36,41 @@ def log(msg):
         f.write(msg + '\n')
 
 ########################################################################################################################
-# GUI控制界面 #
+# gui #
+app = Flask(__name__, static_url_path='', static_folder='./gui')
+
 #############
+# gui主程序 #
+###########
+def gui_flask():
+
+    @app.route('/')
+    def index():
+        return send_from_directory('gui', 'index.html')
+    app.run(host='0.0.0.0', port=541, threaded=False)
+
+###########
+# gui总控 #
+#########
+def gui_server():
+
+    ### 开启GUI服务 ###
+    pg = Process(target=gui_flask)
+    pg.start()
+
+    ### 检测 ###
+    while True:
+        try:
+            get('http://127.0.0.1:541', timeout=1)
+            break
+        except:
+            continue
+
+    ### 开启GUI界面 ###
+    system(r'.\Electron\electron-gui.exe --flask-start')
+
+    ### 结束flask服务 ###
+    kill(pg.pid, SIGTERM)
 
 ########################################################################################################################
 # 任务栏图标 #
@@ -45,7 +83,7 @@ def log(msg):
 def main():
 
     ### 全局变量 ###
-    global last_start_time, ftp_path, auto_start, port, account, ftp_core
+    global last_start_time, ftp_path, auto_start, port, account
 
     ###读取配置文件 ###
     try:
@@ -79,6 +117,7 @@ def main():
             log('创建完成.')
 
     ### 开启服务 ###
+    gui_server()
 
 if __name__ == '__main__':
     main()

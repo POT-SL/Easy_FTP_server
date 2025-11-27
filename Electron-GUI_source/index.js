@@ -7,8 +7,7 @@ const createWindow = () => {
     resizable: false,
   })
 
-  const textData = encodeURIComponent('from_ftp_electron_gui');
-  win.loadURL(`http://127.0.0.1:541/?data=${textData}`);
+  win.loadURL(`http://127.0.0.1:541/`);
 
   win.setMenu(null);
 }

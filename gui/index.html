@@ -1,0 +1,187 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTP服务器（简易版）</title>
+    <style>body {background-color: rgb(229, 229, 229);}</style>
+    <link rel="stylesheet" href="./css/test.css">
+    <link rel="stylesheet" href="./css/taskbar.css">
+    <link rel="stylesheet" href="./css/main_frame.css">
+    <link rel="stylesheet" href="./css/font_frane.css">
+    <link rel="stylesheet" href="./css/box_frame.css">
+    <link rel="stylesheet" href="./css/switch_button.css">
+    <link rel="stylesheet" href="./css/psw_show.css">
+    <link rel="stylesheet" href="./css/pop_up_notice.css">
+</head>
+<body>
+    
+    <!--taskbar-->
+    <div class="taskbar">
+        <button id="taskbar_status"><img src="./img/main.svg" alt="" style="width: 40px; height: 40px;"></button>
+        <button id="taskbar_ftpset"><img src="./img/setting.svg" alt="" style="width: 40px; height: 40px;"></button>
+        <button id="taskbar_system"><img src="./img/user.svg" alt="" style="width: 45px; height: 45px;"></button>
+        <button id="taskbar_about"><img src="./img/about.svg" alt="" style="width: 35px; height: 35px;"></button>
+    </div>
+
+    <!--账密设置界面(堆在最前面)-->
+    <div id="psw_change">
+        <div style="background-color: rgba(246, 246, 246, 0.5); backdrop-filter: blur(5px);">
+            <div style="width: 250px; height: 175px; justify-content: space-evenly;">
+                <div style="width: 250px; height: 65px; background-color: rgba(253, 253, 253, 0.5); flex-direction: row;">
+                    <p class="text">账户：</p>
+                    <input type="text" name="账户" id="edit_user">
+                </div>
+                <div style="width: 250px; height: 65px; background-color: rgba(253, 253, 253, 0.5); flex-direction: row;">
+                    <p class="text">密码：</p>
+                    <input type="text" name="密码" id="edit_psw">
+                </div>
+            </div>
+            <div style="width: 300px; height: 75px; flex-direction: row; justify-content: space-evenly;">
+                <button id="psw_confirm"><p class="text">确认</p></button>
+                <button id="psw_cancel"><p class="text">取消</p></button>
+            </div>
+        </div>
+    </div>
+
+    <!--通知界面(默认隐藏)-->
+    <div id="pop_up"><p>你好</p></div>
+
+    <!--(主)界面-->
+    <div class="main">
+        <!--滑动块-->
+        <div id="gui_main">
+
+            <!--状态界面-->
+            <div id="gui_status">
+
+                <div class="text"><p>--主页--</p></div>
+                <!--同步状态-->
+                <div class="box" style="height: 150px; width: 250px; border-radius: 15px;">
+                    <img src="./img/explorer.png" alt="">
+                    <div style="height: 100px;">
+                        <p style="margin: 15px;">上次FTP启用时间：</p>
+                        <p style="margin: 15px;" id="last_sync_time">1970-01-01 08:00</p>
+                    </div>
+                </div>
+
+                <!--ftp开启状态-->
+                <div class="box" style="width: 100px;">
+                    <p>ftp服务：</p>
+                    <p id="ftp_status" style="font-weight: 700; color:rgb(148, 243, 179);">开启</p>
+                </div>
+
+                <!--文件夹路径-->
+                <div class="box">
+                    <p>文件夹路径：</p>
+                    <p id="file_location">C:\Users\POT\Appdata\Local\Backup\</p>
+                </div>
+
+                <!--ftp手动开关-->
+                <div class="box button" style="justify-content: flex-start">
+                    <button id="ftp_on" style="margin-left: 0;"><p style="color: rgb(88, 214, 141);">开启 FTP</p></button>
+                    <button id="ftp_off"><p style="color: rgb(238, 0, 0);">关闭 FTP</p></button>
+                </div>
+
+            </div>
+
+            <!--ftp设置界面-->
+            <div id="gui_ftpset">
+
+                <!--文件夹设置-->
+                <div class="text"><p>--同步文件夹--</p></div>
+                <div class="box">
+                    <p>文件夹路径：</p>
+                    <p id="file_location">C:\Users\POT\Appdata\Local\Backup\</p>
+                </div>
+                <div class="box button">
+                    <button id="choice_locaion"><p>更改路径</p></button>
+                    <button id="open_locaion"><p>打开文件夹</p></button>
+                </div>
+
+                <!--定时开启设置-->
+                <div class="text"><p>--定时开启--</p></div>
+                <div class="box">
+                    <div style="height: 50px;">
+                        <p style="margin-top: 5px;">定时开启开关</p>
+                        <p style="font-size: 0.8rem; color: rgb(142, 142, 142);">出于安全性考虑，防止24h暴露端口</p>
+                    </div>
+                    <label class="toggle-switch"><input type="checkbox" id="auto_start"><span class="slider round"></span></label>
+                </div>
+                <div class="box">
+                    <p>定时开启</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-direction: row;">
+                        <p>开启时间：</p>
+                        <input type="number" id="start_hour" value="08" min="0" max="23">
+                        <p style="margin: 5px;">:</p>
+                        <input type="number" id="start_minute" value="00" min="0" max="59">
+                        <p style="margin-left: 5px;">关闭时间：</p>
+                        <input type="number" id="end_hour" value="20" min="0" max="23">
+                        <p style="margin: 5px;">:</p>
+                        <input type="number" id="end_minute" value="00" min="0" max="59">
+                    </div>
+                </div>
+
+            </div>
+
+            <!--用户账户设置界面-->
+            <div id="gui_system">
+
+                <!--端口设置-->
+                <div class="text"><p>--自定义端口--</p></div>
+                <div class="box" style="width: 150px;">
+                    <p>端口号：</p>
+                    <input type="number" id="port" value="21" min="1" max="65535">
+                </div>
+                <div class="text" style="margin-top: 5px; margin-left: 135px;"><p id="port_show" style="font-size: 12px;">当前端口：21</p></div>
+                
+                <!--用户账户设置-->
+                <div class="text"><p>--自定义账户--</p></div>
+                <div class="box">
+                    <div style="width: 290; display: flex; flex-direction: row;">
+                        <p>用户：</p>
+                        <p id="user_show">User</p>
+                    </div>
+                    <div style="width: 290; display: flex; flex-direction: row;">
+                        <p>密码：</p>
+                    <p id="psw_show">123456</p>
+                    </div>
+                </div>
+                <div class="box button">
+                    <button id="edit_user_display" style="width: 150px;"><p>更改账户密码</p></button>
+                </div>
+
+            </div>
+
+            <!--关于界面-->
+            <div id="gui_about">
+                
+                <div class="text"><p>--关于--</p></div>
+                <div class="box" style="height: 150px; width: 300px; border-radius: 15px;">
+                    <img src="./img/explorer.png" alt="">
+                    <div style="height: 100px;">
+                        <p style="margin: 15px;">作者：笙铃/Nekofox POT</p>
+                        <p style="margin: 15px; font-size: 13px;">如有bug可以去issue反馈.</p>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+    <!--菜单栏切换控制-->
+    <script src="./jts/taskbar.js"></script>
+    <!--文件夹选择与打开-->
+    <script src="./jts/file_location_button_event.js"></script>
+    <!--自动开启的按钮按钮状态-->
+    <script src="./jts/auto_start_button_event.js"></script>
+    <!--时间输入自动纠正-->
+    <script src="./jts/input_catch.js"></script>
+    <!--用户账户修改弹出-->
+    <script src="./jts/user_change_display.js"></script>
+    <!--弹窗-->
+    <script src="./jts/pop_up_notice.js"></script>
+
+</body>
+</html>
