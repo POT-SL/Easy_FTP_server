@@ -11,21 +11,22 @@ from signal import SIGTERM
 from flask import Flask, send_from_directory, request
 from requests import get
 
-
 from ftp_core import ftp_core
 
 ###########
 # 配置数据 #
 ##########
-last_start_time = '1970-01-01 08:00'
-ftp_path = 'C:\\'
-auto_start = {'status': False, 'start_time': [0, 0], 'end_time': [23, 59]}
-port = 21
-account = {'user': 'user', 'psw': '123123'}
+last_start_time = '1970-01-01 08:00'    # ftp最后同步时间
+ftp_path = 'C:\\'   # 文件夹路径
+auto_start = {'status': False, 'start_time': [0, 0], 'end_time': [23, 59]}  # 自动开启
+port = 21   # ftp端口
+account = {'user': 'user', 'psw': '123123'} # ftp账户密码
 
 ###########
 # 全局变量 #
 ##########
+nf = ftp_core(account['user'], account['psw'], ftp_path, port)
+ftp_status = False
 
 ########################################################################################################################
 # log记录 #
@@ -38,6 +39,65 @@ def log(msg):
 ########################################################################################################################
 # gui #
 app = Flask(__name__, static_url_path='', static_folder='./gui')
+
+### 关闭ftp ###
+@app.route('/ftp_close')
+def ftp_close():
+    global nf, ftp_status
+    if ftp_status:
+        kill(nf.pid, SIGTERM)
+        nf = ftp_core(account['user'], account['psw'], ftp_path, port)
+        ftp_status = False
+### 打开ftp ###
+@app.route('/ftp_open')
+def ftp_open():
+    global nf, ftp_status
+    if not ftp_status:
+        nf.start()
+        ftp_status = True
+### 获取ftp密码 ###
+@app.route('/get_psw')
+def get_psw():
+    return account['psw']
+### 获取ftp账户 ###
+@app.route('/get_user')
+def get_user():
+    return account['user']
+### 获取ftp端口 ###
+@app.route('/get_ftp_port')
+def get_ftp_port():
+    return str(port)
+### 获取定时关闭的时间(分) ###
+@app.route('/get_end_time_minute')
+def get_end_time_minute():
+    return str(auto_start['end_time'][1])
+### 获取定时关闭的时间(时) ###
+@app.route('/get_end_time_hour')
+def get_end_time_hour():
+    return str(auto_start['end_time'][0])
+### 获取定时开启的时间(分) ###
+@app.route('/get_start_time_minute')
+def get_start_time_minute():
+    return str(auto_start['start_time'][1])
+### 获取定时开启的时间(时) ###
+@app.route('/get_start_time_hour')
+def get_start_time_hour():
+    return str(auto_start['start_time'][0])
+### 获取定时开启状态 ###
+@app.route('/get_auto_start_status')
+def get_auto_start_status():
+    if auto_start['status']:
+        return 'true'
+    else:
+        return 'false'
+### 获取文件夹路径 ###
+@app.route('/get_ftp_path')
+def get_ftp_path():
+    return ftp_path
+### 获取最后开启时间 ###
+@app.route('/get_last_start_time')
+def get_last_start_time():
+    return last_start_time
 
 #############
 # gui主程序 #
