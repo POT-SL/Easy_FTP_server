@@ -10,6 +10,7 @@ from os import system, kill
 from signal import SIGTERM
 from flask import Flask, send_from_directory, request
 from requests import get
+from easygui import diropenbox
 
 from ftp_core import ftp_core
 
@@ -25,8 +26,8 @@ account = {'user': 'user', 'psw': '123123'} # ftp账户密码
 ###########
 # 全局变量 #
 ##########
-nf = ftp_core(account['user'], account['psw'], ftp_path, port)
-ftp_status = False
+nf = ftp_core(account['user'], account['psw'], ftp_path, port)  # ftp线程
+ftp_status = False  # ftp开启状态
 
 ########################################################################################################################
 # log记录 #
@@ -40,64 +41,89 @@ def log(msg):
 # gui #
 app = Flask(__name__, static_url_path='', static_folder='./gui')
 
+### 定时开启相关 ###
+@app.route('/switch_auto_start')
+def switch_auto_start():
+    pass
+### 路径相关 ###
+@app.route('/ftp_location', methods=['POST'])
+def ftp_location():
+
+    global ftp_path
+
+    try:
+
+        # 获取词条
+        tmp = loads(request.get_json())
+
+        # 如果要打开路径
+        if tmp['type'] == 'load':
+            # 打开
+            system(f'start {ftp_path}')
+        # 如果是要切换文件夹
+        elif tmp['type'] == 'change':
+            # 使用dir_open选择路径
+            tmp = diropenbox()
+            # 如果有效
+            if tmp:
+                # 更改
+                ftp_path = tmp
+                # 完成
+                return 'ok'
+            # 如果无效
+            else:
+                # 取消
+                return 'cancel'
+        # 如果都不是
+        else:
+            # 什么玩意？
+            return '?'
+
+    # 如果出错了
+    except Exception as e:
+        # 记录
+        log(e)
+        return e
 ### 关闭ftp ###
-@app.route('/ftp_close')
+@app.route('/ftp_close', methods=['POST'])
 def ftp_close():
+
     global nf, ftp_status
+
+    # 如果ftp开启了
     if ftp_status:
+        # 强制关闭
         kill(nf.pid, SIGTERM)
+        # 重置线程
         nf = ftp_core(account['user'], account['psw'], ftp_path, port)
         ftp_status = False
 ### 打开ftp ###
-@app.route('/ftp_open')
+@app.route('/ftp_open', methods=['POST'])
 def ftp_open():
+
     global nf, ftp_status
+
+    # 如果ftp没有开启
     if not ftp_status:
+        # 开机
         nf.start()
         ftp_status = True
-### 获取ftp密码 ###
-@app.route('/get_psw')
-def get_psw():
-    return account['psw']
-### 获取ftp账户 ###
-@app.route('/get_user')
-def get_user():
-    return account['user']
-### 获取ftp端口 ###
-@app.route('/get_ftp_port')
-def get_ftp_port():
-    return str(port)
-### 获取定时关闭的时间(分) ###
-@app.route('/get_end_time_minute')
-def get_end_time_minute():
-    return str(auto_start['end_time'][1])
-### 获取定时关闭的时间(时) ###
-@app.route('/get_end_time_hour')
-def get_end_time_hour():
-    return str(auto_start['end_time'][0])
-### 获取定时开启的时间(分) ###
-@app.route('/get_start_time_minute')
-def get_start_time_minute():
-    return str(auto_start['start_time'][1])
-### 获取定时开启的时间(时) ###
-@app.route('/get_start_time_hour')
-def get_start_time_hour():
-    return str(auto_start['start_time'][0])
-### 获取定时开启状态 ###
-@app.route('/get_auto_start_status')
-def get_auto_start_status():
-    if auto_start['status']:
-        return 'true'
-    else:
-        return 'false'
-### 获取文件夹路径 ###
-@app.route('/get_ftp_path')
-def get_ftp_path():
-    return ftp_path
-### 获取最后开启时间 ###
-@app.route('/get_last_start_time')
-def get_last_start_time():
-    return last_start_time
+### 获取实时数据 ###
+@app.route('/get_status', methods=['GET'])
+def get_status():
+
+    # 格式化数据
+    data = {
+        'last_start_time': last_start_time,
+        'ftp_path': ftp_path,
+        'auto_start': auto_start,
+        'port': port,
+        'account': account,
+        'ftp_status': ftp_status,
+    }
+
+    # 返回数据
+    return dumps(data)
 
 #############
 # gui主程序 #
